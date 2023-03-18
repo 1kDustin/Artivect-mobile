@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "680824289473",
+    "project_id": "artivect-388ce",
+    "storage_bucket": "artivect-388ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680824289473:android:99c08f85a143662dd93c40",
+        "android_client_info": {
+          "package_name": "com.artivect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680824289473-u8c764i8rolnkqsfc5eipmljeejmohdq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp9gz33DJYxNyBuAfSmVCdo3vZ61XYqZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680824289473-u8c764i8rolnkqsfc5eipmljeejmohdq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "680824289473-t9pre369arnrkdecbmp990brrm67qb07.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.artivect.schomburg.solutions"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
