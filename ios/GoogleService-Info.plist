@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>680824289473-t9pre369arnrkdecbmp990brrm67qb07.apps.googleusercontent.com</string>
+	<string>680824289473-ahpr4217so1t4ltpnhrgqfi16msju3s8.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.680824289473-t9pre369arnrkdecbmp990brrm67qb07</string>
+	<string>com.googleusercontent.apps.680824289473-ahpr4217so1t4ltpnhrgqfi16msju3s8</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCL7wjgs5p-1vaenGZhhER28l3TB20ZwWg</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.artivect.schomburg.solutions</string>
+	<string>com.artivect.dtechappsolutions</string>
 	<key>PROJECT_ID</key>
 	<string>artivect-388ce</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:680824289473:ios:f87f631b6316c75fd93c40</string>
+	<string>1:680824289473:ios:e06b13612dcbd357d93c40</string>
 </dict>
 </plist>
