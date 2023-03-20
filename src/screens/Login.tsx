@@ -14,6 +14,7 @@ import auth from '@react-native-firebase/auth';
 import {PhoneAuthCodeModal} from '../components/loginComponents/PhoneAuthCodeModal';
 import {useDispatch} from 'react-redux';
 import {setFirebaseUserData, setIsAuthenticated} from '../slices/AuthSlice';
+import TextInputMask from 'react-native-text-input-mask';
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -67,12 +68,13 @@ export const Login = () => {
           {'Enter your phone number to login or get \n signed up'}
         </Text>
         <View>
-          <TextInput
+          <TextInputMask
             keyboardType="phone-pad"
             style={styles.textInput}
             placeholder="+1 (999) 999-9999"
             value={phoneNumber}
-            onChangeText={value => setPhoneNumber(value)}
+            onChangeText={(formatted, extracted) => setPhoneNumber(extracted)}
+            mask={'+1 ([000]) [000] [0000]'}
           />
           {!confirm && (
             <TouchableOpacity
