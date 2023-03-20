@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
   TextInput,
+  Linking,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import {logoutUser} from '../slices/AuthSlice';
@@ -47,7 +48,9 @@ export const Profile = () => {
           // onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
         />
       )}
-      <ScrollView contentContainerStyle={styles.subContainer}>
+      <ScrollView
+        contentInset={{bottom: 120}}
+        contentContainerStyle={styles.subContainer}>
         <View style={styles.imageAndNameContainer}>
           <TouchableOpacity style={styles.userImageContainer}>
             <Image style={styles.userImage} source={{uri: userImage}} />
@@ -55,7 +58,10 @@ export const Profile = () => {
           <View>
             <Text style={styles.userName}>{userName}</Text>
             <Text>{`Genre: ${genre}`}</Text>
-            <Text>{website ? website : null}</Text>
+            <TouchableOpacity
+              onPress={() => Linking.openURL(dummyUser.userWebsite)}>
+              <Text style={styles.websiteText}>{website ? website : null}</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.userImage} />
         </View>
@@ -68,6 +74,7 @@ export const Profile = () => {
         </View>
         <Divider />
         <Discography />
+        <Divider />
         <TouchableOpacity
           style={styles.logoutButton}
           onPress={handleUserLogout}>
@@ -104,6 +111,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#FFF',
   },
+  websiteText: {
+    color: colors.mainColor,
+  },
   userImageContainer: {
     borderRadius: 25,
   },
@@ -117,7 +127,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   userBioContainer: {
-    marginVertical: 16,
+    marginTop: 16,
   },
   userBio: {
     textAlign: 'center',

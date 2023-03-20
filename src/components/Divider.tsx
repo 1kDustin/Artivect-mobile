@@ -11,5 +11,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: colors.borderColor,
     opacity: 0.3,
+    marginVertical: 16,
   },
 });

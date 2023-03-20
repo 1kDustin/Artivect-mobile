@@ -1,5 +1,12 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet, Image, View} from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Image,
+  View,
+  Linking,
+} from 'react-native';
 
 interface Props {
   name: string;
@@ -9,7 +16,9 @@ interface Props {
 
 export const AlbumItem = ({name, image, url}: Props) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      onPress={() => Linking.openURL(url)}
+      style={styles.container}>
       <View>
         <Image style={styles.image} source={{uri: image}} />
       </View>
