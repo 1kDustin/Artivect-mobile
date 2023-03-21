@@ -12,6 +12,13 @@ const dummyUser = {
   userBio:
     'I have been an EDM DJ for 5 years performing in the most notable locations in the U.S.',
   genre: ['EDM', 'Folk'],
+  socials: [
+    {name: 'Facebook', url: 'www.facebook.com'},
+    {name: 'Twitter', url: 'www.twitter.com'},
+    {name: 'Instagram', url: 'www.instagram.com'},
+    {name: 'Reddit', url: 'www.reddit.com'},
+    {name: 'Youtube', url: 'www.youtube.com'},
+  ],
   discography: [
     {
       id: 1,

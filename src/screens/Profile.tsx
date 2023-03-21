@@ -17,6 +17,8 @@ import {SliderBox} from 'react-native-image-slider-box';
 import dummyUser from './DummyUser';
 import {Discography} from '../components/profileComponents/Discography';
 import {Divider} from '../components/Divider';
+import {Socials} from '../components/profileComponents/Socials';
+import {FriendStatus} from '../components/profileComponents/FriendStatus';
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -63,7 +65,8 @@ export const Profile = () => {
               <Text style={styles.websiteText}>{website ? website : null}</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.userImage} />
+          <FriendStatus />
+          {/* <View style={styles.userImage} /> */}
         </View>
         <View style={styles.userBioContainer}>
           <TextInput
@@ -72,6 +75,7 @@ export const Profile = () => {
             value={dummyUser.userBio}
           />
         </View>
+        <Socials />
         <Divider />
         <Discography />
         <Divider />
