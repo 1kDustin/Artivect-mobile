@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
@@ -15,31 +14,50 @@ import {PhoneAuthCodeModal} from '../components/loginComponents/PhoneAuthCodeMod
 import {useDispatch} from 'react-redux';
 import {setFirebaseUserData, setIsAuthenticated} from '../slices/AuthSlice';
 import TextInputMask from 'react-native-text-input-mask';
+import firestore from '@react-native-firebase/firestore';
+import {useNavigation} from '@react-navigation/native';
 
-export const Login = () => {
+export const Login = ({}) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const usersCollection = firestore().collection('users');
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
   const [confirm, setConfirm] = useState<any>(null);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [code, setCode] = useState<string>('');
   const [codeErr, setCodeErr] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [user, setUser] = useState<any>();
+  const [isNewUser, setIsNewUser] = useState<boolean>();
+  const [confirmRes, setConfirmRes] = useState<any>();
 
-  function onAuthStateChanged(user: any) {
-    if (user) {
-      dispatch(setFirebaseUserData(user._user));
-      dispatch(setIsAuthenticated(true));
-      // Some Android devices can automatically process the verification code (OTP) message, and the user would NOT need to enter the code.
-      // Actually, if he/she tries to enter it, he/she will get an error message because the code was already used in the background.
-      // In this function, make sure you hide the component(s) for entering the code and/or navigate away from this screen.
-      // It is also recommended to display a message to the user informing him/her that he/she has successfully logged in.
+  const createAccount = async () => {
+    await usersCollection
+      .doc(user.uid)
+      .set({
+        userId: user.uid,
+        phoneNumber: phoneNumber,
+      })
+      .catch(err => console.log('error', err));
+    navigation.navigate('ArtistOnboarding' as never);
+  };
+
+  function onAuthStateChanged(userData: any) {
+    if (userData) {
+      setUser(userData._user);
+      dispatch(setFirebaseUserData(userData._user));
+      if (isNewUser === true && confirmRes) {
+        createAccount();
+      } else if (isNewUser === false) {
+        dispatch(setIsAuthenticated(true));
+      }
     }
   }
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber;
-  }, []);
+  }, [confirm, confirmRes, isNewUser]);
 
   const signInWithPhoneNumber = async (number: any) => {
     const confirmation = await auth().signInWithPhoneNumber(`+1 ${number}`);
@@ -49,7 +67,10 @@ export const Login = () => {
   const confirmCode = async () => {
     setIsLoading(true);
     try {
-      await confirm.confirm(code);
+      await confirm.confirm(code).then((res: any) => {
+        setIsNewUser(res.additionalUserInfo.isNewUser);
+        setConfirmRes(res);
+      });
     } catch (error) {
       setCodeErr(true);
     }
@@ -73,7 +94,9 @@ export const Login = () => {
             style={styles.textInput}
             placeholder="+1 (999) 999-9999"
             value={phoneNumber}
-            onChangeText={(formatted, extracted) => setPhoneNumber(extracted)}
+            onChangeText={(formatted, extracted) =>
+              setPhoneNumber(extracted as any)
+            }
             mask={'+1 ([000]) [000] [0000]'}
           />
           {!confirm && (

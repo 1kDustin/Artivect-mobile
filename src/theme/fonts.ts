@@ -1,5 +1,5 @@
 const fonts = {
-  title: 'Raleway',
+  title: 'Georgia',
 };
 
 export default fonts;

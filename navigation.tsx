@@ -5,6 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Home} from './src/screens/Home';
 import {Login} from './src/screens/Login';
 import {Profile} from './src/screens/Profile';
+import {ArtistFlowOne} from './src/screens/onboarding/ArtistFlowOne';
 import {NavigationContainer} from '@react-navigation/native';
 import HomeIcon from 'react-native-vector-icons/FontAwesome';
 import ProfileIcon from 'react-native-vector-icons/Ionicons';
@@ -41,13 +42,29 @@ export const LoginStack = () => {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
+          initialRouteName="Login"
           screenOptions={{
             headerShown: false,
           }}>
-          <Stack.Screen name="Home" component={Login} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen
+            name="ArtistOnboarding"
+            component={ArtistOnboardingStack}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
+  );
+};
+
+export const ArtistOnboardingStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="ArtistFlowOne" component={ArtistFlowOne} />
+    </Stack.Navigator>
   );
 };
 

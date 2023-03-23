@@ -51,7 +51,7 @@ export const Profile = () => {
         />
       )}
       <ScrollView
-        contentInset={{bottom: 120}}
+        contentInset={{bottom: 160}}
         contentContainerStyle={styles.subContainer}>
         <View style={styles.imageAndNameContainer}>
           <TouchableOpacity style={styles.userImageContainer}>
@@ -66,7 +66,6 @@ export const Profile = () => {
             </TouchableOpacity>
           </View>
           <FriendStatus />
-          {/* <View style={styles.userImage} /> */}
         </View>
         <View style={styles.userBioContainer}>
           <TextInput
