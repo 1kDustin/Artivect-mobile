@@ -42,11 +42,11 @@ export const LoginStack = () => {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Login"
+          initialRouteName="ArtistOnboarding"
           screenOptions={{
             headerShown: false,
           }}>
-          <Stack.Screen name="Login" component={Login} />
+          {/* <Stack.Screen name="Login" component={Login} /> */}
           <Stack.Screen
             name="ArtistOnboarding"
             component={ArtistOnboardingStack}

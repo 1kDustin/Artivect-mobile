@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store';
-import Navigation, {ArtistOnboardingStack} from '../../navigation';
+import Navigation from '../../navigation';
 import {LoginStack} from '../../navigation';
 
 export const AuthSwitch = () => {
@@ -10,5 +10,4 @@ export const AuthSwitch = () => {
   );
 
   return isAuth ? <Navigation /> : <LoginStack />;
-  // return <ArtistOnboardingStack />;
 };

@@ -1,10 +1,75 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  View,
+  PermissionsAndroid,
+  Platform,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ImagePicker from 'react-native-image-crop-picker';
+import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
+import {useSelector} from 'react-redux';
 
 export const Avatar = () => {
+  const usersCollection = firestore().collection('users');
+  const firebaseUser = useSelector(
+    (state: any) => state?.authSlice.firebaseUserData,
+  );
+  const bucketRef = storage().ref(firebaseUser.uid);
+
+  async function hasAndroidPermission() {
+    const permission =
+      Platform.Version >= 33
+        ? PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES
+        : PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
+
+    const hasPermission = await PermissionsAndroid.check(permission);
+    if (hasPermission) {
+      return true;
+    }
+
+    const status = await PermissionsAndroid.request(permission);
+    return status === 'granted';
+  }
+
+  async function savePictureAndroid() {
+    if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
+      return;
+    }
+  }
+
+  const saveImageIOS = async () => {
+    try {
+        await bucketRef.putFile()
+    //   let url = await storage().ref(`avatars/${uid}`).getDownloadURL();
+
+    //   await usersCollection.doc(uid).update({
+    //     avatar: url,
+    //   });
+      //   dispatch(setUserAvatar(url));
+    } catch (err) {
+      console.log('err', err);
+    }
+  };
+
+  const openCameraRoll = () => {
+    ImagePicker.openPicker({
+      cropping: true,
+      cropperCircleOverlay: true,
+      multiple: false,
+    })
+      .then(image => {
+        console.log(image);
+        //   SetAvatar(image);
+      })
+      .catch(err => console.log('err', err));
+  };
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity onPress={() => openCameraRoll()} style={styles.container}>
       <View style={styles.buttonContainer}>
         <Icon name="person-add" size={45} />
       </View>
